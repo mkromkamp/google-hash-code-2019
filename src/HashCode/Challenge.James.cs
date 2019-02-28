@@ -23,7 +23,7 @@ namespace HashCode
                 Slide nextHighest = null;
                 var interestFactor = -1;
 
-                foreach (var slide in remainingSlides)
+                foreach (var slide in remainingSlides.Take(100))
                 {
                     var interest = currentSlide.GetInterestFactor(slide);
                     if (interest > interestFactor)
@@ -37,8 +37,10 @@ namespace HashCode
                 currentSlide = nextHighest;
                 remainingSlides.Remove(nextHighest);
                 totalScore = totalScore + interestFactor;
-
-                Console.WriteLine($"Slides found: {slides.Count}");
+                if (slides.Count % 1000 == 0)
+                {
+                    Console.WriteLine($"Slides found: {slides.Count}");
+                }
             }
 
             Console.WriteLine(totalScore);
@@ -62,8 +64,9 @@ namespace HashCode
                 .Select(x => x.Key)
                 .ToList();
 
+            Console.WriteLine("found keys");
             var result = new List<Slide>(slides.Count);
-            foreach (var key in keys)
+            foreach (var key in keys.Take(50))
             {
                 var dave = slides.Where(x => x.Tags.Contains(key)).ToList();
                 result.AddRange(dave);
@@ -71,17 +74,23 @@ namespace HashCode
                 dave.ForEach(x=> slides.Remove(x));
             }
 
-            return slides;
+            result.AddRange(slides);
+
+            Console.WriteLine("ordered list");
+
+            return result;
         }
 
         private static List<Slide> CreateSlidesFromVertical(List<Photo> photos)
         {
             var verticalPhotos = photos.Where(x => x.Orientation.Equals(Orientation.Vertical))
+                .OrderByDescending(x=>x.Tags.Count)
                 .ToArray();
 
             var result = new List<Slide>();
             for (var i = 0; i < verticalPhotos.Length; i += 2)
             {
+
                 var list = new List<Photo> { verticalPhotos[i], verticalPhotos[i + 1] };
                 result.Add(new Slide { Photos = list });
             }
