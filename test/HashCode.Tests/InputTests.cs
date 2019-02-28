@@ -13,7 +13,7 @@ namespace HashCode.Tests
         [Fact]
         public void InputExampleCorrectlyParses()
         {
-            var inputLines = ExampleInput.Split(Environment.NewLine).ToList();
+            var inputLines = ExampleInput.Split('\n').ToList();
             var actual = Input.Parse(inputLines);
 
             Assert.NotNull(actual);
