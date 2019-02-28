@@ -21,7 +21,7 @@ namespace HashCode
 
             var inputLines3 = File.ReadAllLines($"input/sample3.in").ToArray();
             var challenge3 = Input.Parse(inputLines3);
-            Output.Write(challenge3.NextTry(), $"output/sample3.out");
+            Output.Write(challenge3.CurrentBestThree(), $"output/sample3.out");
 
 
             Console.WriteLine("Team Endor go!!");

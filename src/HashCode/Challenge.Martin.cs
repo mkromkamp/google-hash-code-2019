@@ -6,7 +6,7 @@ namespace HashCode
 {
     public partial class Challenge
     {
-        public Solution NextTry()
+        public Solution CurrentBestThree()
         {
             var score = 0;
             var remainingPhotos = Photos.OrderByDescending(p => p.Tags.Count).ToList();
