@@ -11,6 +11,10 @@ namespace HashCode
     public class Slide
     {
         public List<Photo> Photos { get; set; }
+        public List<string> Tags
+        {
+            get { return Photos.SelectMany(x => x.Tags).ToList(); }
+        }
 
         public static Slide Create(Photo photo)
         {
