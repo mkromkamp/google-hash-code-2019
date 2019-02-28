@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,6 +10,7 @@ namespace HashCode
 
         public Solution SolveSimple()
         {
+            var totalScore = 0;
             var remainingPhotos = Photos;
             var slides = new List<Slide>();
 
@@ -20,7 +22,7 @@ namespace HashCode
             while (remainingPhotos.Any())
             {
                 Slide nextHighest = null;
-                var interestFactor = 0;
+                var interestFactor = -1;
                 
                 foreach (var photo in remainingPhotos)
                 {
@@ -41,7 +43,10 @@ namespace HashCode
 
                 slides.Add(nextHighest);
                 nextHighest.Photos.ForEach(p => remainingPhotos.Remove(p));
+                totalScore = totalScore + interestFactor;
             }
+
+            Console.WriteLine(totalScore);
 
             return new Solution
             {
