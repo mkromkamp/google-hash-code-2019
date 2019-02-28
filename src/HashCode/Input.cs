@@ -11,7 +11,7 @@ namespace HashCode
 
             return new Challenge
             {
-                SomeParam = input,
+                Photos = new List<Photo>()
             };
         }
     }

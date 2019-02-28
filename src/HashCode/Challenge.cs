@@ -9,9 +9,11 @@ namespace HashCode
 
         public Solution SolveSimple()
         {
+
+
             return new Solution
             {
-                SomeSolutionParam = string.Join(string.Empty, SomeParam.Reverse()),
+                SomeSolutionParam = string.Empty,
             };
         }
     }
@@ -19,11 +21,13 @@ namespace HashCode
     public class Photo
     {
         public int Id { get; set; }
-        public Oriientiation Oriientiation { get; set; }
+        public Orientation Orientation { get; set; }
         public List<string> Tags { get; set; }
     }
 
-    public enum Oriientiation
+    public enum Orientation
     {
+        Horizontal,
+        Vertical
     }
 }
