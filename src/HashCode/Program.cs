@@ -16,6 +16,11 @@ namespace HashCode
                 Output.Write(challenge.SolveStupid(), $"output/sample{i}.out");
             }
 
+            // var inputLines = File.ReadAllLines($"input/sample3.in").ToArray();
+            // var challenge = Input.Parse(inputLines);
+            // Output.Write(challenge.SolveStupid(), $"output/sample3.out");
+
+
             Console.WriteLine("Team Endor go!!");
         }
     }

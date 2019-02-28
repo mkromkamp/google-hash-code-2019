@@ -12,11 +12,21 @@ namespace HashCode
         {
             var remainingPhotos = Photos;
             var slides = new List<Slide>();
-
-            var currentSlide = Slide.Create(remainingPhotos.First(p => p.Orientation == Orientation.Horizontal));
-            slides.Add(currentSlide);
             
-            remainingPhotos.Remove(currentSlide.Photos.First()); // <- should work :P
+            Slide currentSlide = null;
+
+            var horizontalPhoto = remainingPhotos.FirstOrDefault(p => p.Orientation == Orientation.Horizontal);
+            if (horizontalPhoto != null)
+            {
+                currentSlide = Slide.Create(horizontalPhoto);
+            }
+            else
+            {
+                currentSlide = Slide.Create(remainingPhotos.ElementAt(0), remainingPhotos.ElementAt(1));
+            }
+
+            slides.Add(currentSlide);            
+            currentSlide.Photos.ForEach(p => remainingPhotos.Remove(p));
             
             while (remainingPhotos.Any())
             {
@@ -24,8 +34,14 @@ namespace HashCode
                 var next = Slide.Create(photo);
                 if (photo.Orientation == Orientation.Vertical)
                 {
-                    var otherVertical = remainingPhotos.First(p => p.Id != photo.Id && photo.Orientation == Orientation.Vertical);
-                    next.Photos.Add(otherVertical);
+                    if (remainingPhotos.Count == 1)
+                        break;
+
+                    var otherVertical = remainingPhotos.FirstOrDefault(otherPhoto => otherPhoto.Id != photo.Id && otherPhoto.Orientation == Orientation.Vertical);
+                    if (otherVertical != null)
+                        next.Photos.Add(otherVertical);
+                    else
+                        continue;
                 }
 
                 slides.Add(next);
