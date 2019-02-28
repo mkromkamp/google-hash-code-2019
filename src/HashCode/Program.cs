@@ -9,17 +9,11 @@ namespace HashCode
     {
         static void Main(string[] args)
         {
-            var inputLines = File.ReadAllLines("input/sample.in").ToArray();
-            var challenge = Input.Parse(inputLines);
-            
-            var solutions = new Dictionary<string, Solution>
+            for (int i = 1; i < 6; i++)
             {
-                { "output/sample.out", challenge.SolveSimple() },
-            };
-            
-            foreach (var solution in solutions)
-            {
-                Output.Write(solution.Value, solution.Key);
+                var inputLines = File.ReadAllLines($"input/sample{i}.in").ToArray();
+                var challenge = Input.Parse(inputLines);
+                Output.Write(challenge.SolveSimple(), $"output/sample{i}.out");
             }
 
             Console.WriteLine("Team Endor go!!");
