@@ -61,7 +61,7 @@ namespace HashCode
                 currentSlide = next;
                 next.Photos.ForEach(p => remainingPhotos.Remove(p));
 
-                Console.WriteLine($"Current slides: {slides.Count}");
+                // Console.WriteLine($"Current slides: {slides.Count}");
             }
 
             Console.WriteLine(score);
