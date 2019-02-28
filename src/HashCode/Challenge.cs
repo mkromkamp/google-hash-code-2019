@@ -24,9 +24,13 @@ namespace HashCode
                 
                 foreach (var photo in remainingPhotos)
                 {
-                    // if (photo.Orientation == Orientation.Vertical);
-
                     var possibleNext = Slide.Create(photo);
+                    if (photo.Orientation == Orientation.Vertical)
+                    {
+                        var otherVertical = remainingPhotos.First(p => p.Id != photo.Id && photo.Orientation == Orientation.Vertical);
+                        possibleNext.Photos.Add(otherVertical);
+                    }
+
                     var interest = currentSlide.GetInterestFactor(possibleNext);
                     if (interest > interestFactor)
                     {
@@ -41,6 +45,7 @@ namespace HashCode
 
             return new Solution
             {
+                Slides = slides,
             };
         }
     }
