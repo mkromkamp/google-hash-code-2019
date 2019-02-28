@@ -23,7 +23,7 @@ namespace HashCode
                 Slide nextHighest = null;
                 var interestFactor = -1;
 
-                foreach (var slide in remainingSlides.Take(250))
+                foreach (var slide in remainingSlides.Take(150))
                 {
                     var interest = currentSlide.GetInterestFactor(slide);
                     if (interest > interestFactor)
@@ -66,7 +66,7 @@ namespace HashCode
 
             Console.WriteLine("found keys");
             var result = new List<Slide>(slides.Count);
-            foreach (var key in keys.Take(100))
+            foreach (var key in keys.Take(75))
             {
                 var dave = slides.Where(x => x.Tags.Contains(key)).ToList();
                 result.AddRange(dave);
@@ -84,7 +84,7 @@ namespace HashCode
         private static List<Slide> CreateSlidesFromVertical(List<Photo> photos)
         {
             var verticalPhotos = photos.Where(x => x.Orientation.Equals(Orientation.Vertical))
-                .OrderByDescending(x=>x.Tags.Count)
+                .OrderBy(x=>x.Tags.Count)
                 .ToArray();
 
             var result = new List<Slide>();
