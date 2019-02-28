@@ -42,6 +42,7 @@ namespace HashCode
                 }
 
                 slides.Add(nextHighest);
+                currentSlide = nextHighest;
                 nextHighest.Photos.ForEach(p => remainingPhotos.Remove(p));
                 totalScore = totalScore + interestFactor;
             }
