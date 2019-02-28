@@ -6,7 +6,7 @@ namespace HashCode
 {
     public partial class Challenge
     {
-        public Solution CurrentBestTwo()
+        public Solution CurrentBestTake(int takeCount)
         {
             var score = 0;
             var remainingPhotos = Photos;
@@ -32,7 +32,7 @@ namespace HashCode
                 Slide next = null;
                 var nextInterest = -1;
 
-                foreach (var photo in remainingPhotos.Take(100))
+                foreach (var photo in remainingPhotos.Take(takeCount))
                 {
                     var nextPossible = Slide.Create(photo);
 
