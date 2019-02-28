@@ -65,20 +65,21 @@ namespace HashCode
 
             var currentSlide = Slide.Create(remainingPhotos.First(p => p.Orientation == Orientation.Horizontal));
             slides.Add(currentSlide);
-            
+
             remainingPhotos.Remove(currentSlide.Photos.First()); // <- should work :P
-            
+
             while (remainingPhotos.Any())
             {
                 Slide nextHighest = null;
                 var interestFactor = -1;
-                
+
                 foreach (var photo in remainingPhotos)
                 {
                     var possibleNext = Slide.Create(photo);
                     if (photo.Orientation == Orientation.Vertical)
                     {
-                        var otherVertical = remainingPhotos.First(p => p.Id != photo.Id && photo.Orientation == Orientation.Vertical);
+                        var otherVertical = remainingPhotos.First(p =>
+                            p.Id != photo.Id && photo.Orientation == Orientation.Vertical);
                         possibleNext.Photos.Add(otherVertical);
                     }
 
@@ -105,7 +106,73 @@ namespace HashCode
                 Slides = slides,
             };
         }
+
+        public Solution SolveSimpleWithFirstOpt()
+        {
+            var totalScore = 0;
+            var remainingPhotos = Photos;
+            var slides = new List<Slide>();
+
+            var currentSlide = GetFirstSlide(remainingPhotos);
+            slides.Add(currentSlide);
+
+            remainingPhotos.Remove(currentSlide.Photos.First()); // <- should work :P
+
+            while (remainingPhotos.Any())
+            {
+                Slide nextHighest = null;
+                var interestFactor = -1;
+
+                foreach (var photo in remainingPhotos)
+                {
+                    var possibleNext = Slide.Create(photo);
+                    if (photo.Orientation == Orientation.Vertical)
+                    {
+                        var otherVertical = remainingPhotos.First(p =>
+                            p.Id != photo.Id && photo.Orientation == Orientation.Vertical);
+                        possibleNext.Photos.Add(otherVertical);
+                    }
+
+                    var interest = currentSlide.GetInterestFactor(possibleNext);
+                    if (interest > interestFactor)
+                    {
+                        nextHighest = possibleNext;
+                        interestFactor = interest;
+                    }
+                }
+
+                slides.Add(nextHighest);
+                currentSlide = nextHighest;
+                nextHighest.Photos.ForEach(p => remainingPhotos.Remove(p));
+                totalScore = totalScore + interestFactor;
+
+                Console.WriteLine($"Slides found: {slides.Count}");
+            }
+
+            Console.WriteLine(totalScore);
+
+            return new Solution
+            {
+                Slides = slides,
+            };
+        }
+
+        private static Slide GetFirstSlide(List<Photo> photos)
+        {
+            /*var selectMany = photos.SelectMany(x=>x.Tags);
+            var enumerable = selectMany.GroupBy(x=>x);
+
+
+            var groupBy = photos.GroupBy(x=>x.Tags);
+            groupBy.*/
+            return Slide.Create(photos.First(p => p.Orientation == Orientation.Horizontal));
+        }
+
+
+
     }
+
+
 
     public class Photo
     {
