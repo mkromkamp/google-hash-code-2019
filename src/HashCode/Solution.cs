@@ -4,6 +4,11 @@ namespace HashCode
 {
     public class Solution
     {
-        public string SomeSolutionParam { get; set; }
+        public List<Slide> Slides { get; set; }
+    }
+    
+    public class Slide
+    {
+        public List<Photo> Photos { get; set; }
     }
 }

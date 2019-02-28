@@ -9,11 +9,8 @@ namespace HashCode
 
         public Solution SolveSimple()
         {
-
-
             return new Solution
             {
-                SomeSolutionParam = string.Empty,
             };
         }
     }
