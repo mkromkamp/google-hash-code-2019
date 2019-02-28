@@ -31,6 +31,8 @@ namespace HashCode
                 photo.Tags = tags.ToList();
                 result.Add(photo);
             }
+
+            Console.WriteLine("Challenge parsed");
             return new Challenge
             {
                 Photos = result

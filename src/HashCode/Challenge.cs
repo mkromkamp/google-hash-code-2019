@@ -8,6 +8,39 @@ namespace HashCode
     {
         public List<Photo> Photos { get; set; }
 
+        public Solution SolveStupid()
+        {
+            var remainingPhotos = Photos;
+            var slides = new List<Slide>();
+
+            var currentSlide = Slide.Create(remainingPhotos.First(p => p.Orientation == Orientation.Horizontal));
+            slides.Add(currentSlide);
+            
+            remainingPhotos.Remove(currentSlide.Photos.First()); // <- should work :P
+            
+            while (remainingPhotos.Any())
+            {
+                var photo = remainingPhotos.First();
+                var next = Slide.Create(photo);
+                if (photo.Orientation == Orientation.Vertical)
+                {
+                    var otherVertical = remainingPhotos.First(p => p.Id != photo.Id && photo.Orientation == Orientation.Vertical);
+                    next.Photos.Add(otherVertical);
+                }
+
+                slides.Add(next);
+                currentSlide = next;
+                next.Photos.ForEach(p => remainingPhotos.Remove(p));
+
+                Console.WriteLine($"Slides found: {slides.Count}");
+            }
+
+            return new Solution
+            {
+                Slides = slides,
+            };
+        }
+
         public Solution SolveSimple()
         {
             var totalScore = 0;
@@ -45,6 +78,8 @@ namespace HashCode
                 currentSlide = nextHighest;
                 nextHighest.Photos.ForEach(p => remainingPhotos.Remove(p));
                 totalScore = totalScore + interestFactor;
+
+                Console.WriteLine($"Slides found: {slides.Count}");
             }
 
             Console.WriteLine(totalScore);

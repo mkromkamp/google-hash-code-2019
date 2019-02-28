@@ -14,7 +14,7 @@ namespace HashCode
             
             var solutions = new Dictionary<string, Solution>
             {
-                { "output/sample.out", challenge.SolveSimple() },
+                { "output/sample.out", challenge.SolveStupid() },
             };
             
             foreach (var solution in solutions)
