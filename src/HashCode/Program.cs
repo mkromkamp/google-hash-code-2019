@@ -9,7 +9,7 @@ namespace HashCode
     {
         static void Main(string[] args)
         {
-            var inputLines = File.ReadAllLines("input/sample.in").ToList();
+            var inputLines = File.ReadAllLines("input/sample.in").ToArray();
             var challenge = Input.Parse(inputLines);
             
             var solutions = new Dictionary<string, Solution>
