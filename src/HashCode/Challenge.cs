@@ -13,7 +13,7 @@ namespace HashCode
             var remainingPhotos = Photos;
             var slides = new List<Slide>();
 
-            var currentSlide = Slide.Create(remainingPhotos.First(p => p.Orientation == Orientation.Horizontal));
+            var currentSlide = GetFirstSlide(remainingPhotos);
             slides.Add(currentSlide);
             
             remainingPhotos.Remove(currentSlide.Photos.First()); // <- should work :P
@@ -39,6 +39,12 @@ namespace HashCode
             {
                 Slides = slides,
             };
+        }
+
+        private static Slide GetFirstSlide(List<Photo> remainingPhotos)
+        {
+            // james 
+            return Slide.Create(remainingPhotos.First(p => p.Orientation == Orientation.Horizontal));
         }
 
         public Solution SolveSimple()
