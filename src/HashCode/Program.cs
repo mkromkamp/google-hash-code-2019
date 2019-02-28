@@ -11,15 +11,15 @@ namespace HashCode
         {
             var inputLines1 = File.ReadAllLines($"input/sample1.in").ToArray();
             var challenge1 = Input.Parse(inputLines1);
-            Output.Write(challenge1.SolveSimpleWithFirstOpt(), $"output/sample1.out");
+            Output.Write(challenge1.CurrentBest(), $"output/sample1.out");
 
             var inputLines2 = File.ReadAllLines($"input/sample2.in").ToArray();
             var challenge2 = Input.Parse(inputLines2);
-            Output.Write(challenge2.SolveSimpleWithFirstOpt(), $"output/sample2.out");
+            Output.Write(challenge2.CurrentBestTake(250), $"output/sample2.out");
 
             var inputLines3 = File.ReadAllLines($"input/sample3.in").ToArray();
             var challenge3 = Input.Parse(inputLines3);
-            Output.Write(challenge3.SolveSimpleWithFirstOpt(), $"output/sample3.out");
+            Output.Write(challenge3.CurrentBestThree(), $"output/sample3.out");
 
             var inputLines4 = File.ReadAllLines($"input/sample4.in").ToArray();
             var challenge4 = Input.Parse(inputLines4);
