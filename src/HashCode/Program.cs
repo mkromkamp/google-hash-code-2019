@@ -13,7 +13,7 @@ namespace HashCode
             {
                 var inputLines = File.ReadAllLines($"input/sample{i}.in").ToArray();
                 var challenge = Input.Parse(inputLines);
-                Output.Write(challenge.SolveStupid(), $"output/sample{i}.out");
+                Output.Write(challenge.SolveIt(), $"output/sample{i}.out");
             }
 
             // var inputLines = File.ReadAllLines($"input/sample3.in").ToArray();
