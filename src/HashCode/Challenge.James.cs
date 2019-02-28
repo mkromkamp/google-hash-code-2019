@@ -23,7 +23,7 @@ namespace HashCode
                 Slide nextHighest = null;
                 var interestFactor = -1;
 
-                foreach (var slide in remainingSlides.Take(100))
+                foreach (var slide in remainingSlides.Take(250))
                 {
                     var interest = currentSlide.GetInterestFactor(slide);
                     if (interest > interestFactor)
@@ -66,7 +66,7 @@ namespace HashCode
 
             Console.WriteLine("found keys");
             var result = new List<Slide>(slides.Count);
-            foreach (var key in keys.Take(50))
+            foreach (var key in keys.Take(100))
             {
                 var dave = slides.Where(x => x.Tags.Contains(key)).ToList();
                 result.AddRange(dave);
