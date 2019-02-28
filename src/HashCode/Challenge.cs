@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace HashCode
 {
-    public class Challenge
+    public partial class Challenge
     {
         public List<Photo> Photos { get; set; }
 
